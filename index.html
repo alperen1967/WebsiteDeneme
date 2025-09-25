@@ -50,7 +50,7 @@
                 </div>
                 <div
                     class="rounded-xl bg-background-light/20 dark:bg-background-dark/20 backdrop-blur-lg p-8 shadow-2xl">
-                    <form class="space-y-6">
+                    <form class="space-y-6" id="login-form-tag">
                         <div>
                             <label class="sr-only" for="email">Email</label>
                             <input autocomplete="email"
@@ -181,6 +181,11 @@
             document.getElementById('register-form').classList.add('hidden');
             document.getElementById('login-form').classList.remove('hidden');
         }
+
+        document.getElementById('login-form-tag').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = 'home.html';
+        });
     </script>
 
 </body>
