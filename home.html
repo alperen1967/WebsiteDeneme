@@ -51,9 +51,14 @@
 <h1 class="text-xl font-bold text-gray-900 dark:text-white">PhotoApp</h1>
 </div>
 <div class="flex items-center gap-4">
-<button>
-<div class="w-10 h-10 rounded-full bg-cover bg-center ring-2 ring-primary/50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZ5KsI0tUD08obA0Nfru1u1suLEuS-PbbmbvqtBbKk2Gpm8bR2oBpotro2Ga8QGRBDXJbVqb36cDEteF-8I_aF6GqFbSuUdvEJYOfEntiZunsT37mtAPsjvn3xLzIyFpW37FyNAZLDG8zK_Ywj6nLboCuaJImBIYRRfKGmOyj5NbrVGRo9yhrYfo1JEt3epFWqW9X24VfeS7xbc1U5uvr5TClu3nyhGxqsBGRCFZWbtWWrDtz_RYqFowAhqpS9Arq92ayKGdjfijdt");'></div>
-</button>
+    <div class="relative">
+        <button id="profile-button">
+            <div class="w-10 h-10 rounded-full bg-cover bg-center ring-2 ring-primary/50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZ5KsI0tUD08obA0Nfru1u1suLEuS-PbbmbvqtBbKk2Gpm8bR2oBpotro2Ga8QGRBDXJbVqb36cDEteF-8I_aF6GqFbSuUdvEJYOfEntiZunsT37mtAPsjvn3xLzIyFpW37FyNAZLDG8zK_Ywj6nLboCuaJImBIYRRfKGmOyj5NbrVGRo9yhrYfo1JEt3epFWqW9X24VfeS7xbc1U5uvr5TClu3nyhGxqsBGRCFZWbtWWrDtz_RYqFowAhqpS9Arq92ayKGdjfijdt");'></div>
+        </button>
+        <div id="logout-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+            <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Çıkış Yap</a>
+        </div>
+    </div>
 </div>
 </div>
 </div>
@@ -97,6 +102,19 @@
                 uploadIcon.classList.add('hidden');
             }
             reader.readAsDataURL(file);
+        }
+    });
+
+    const profileButton = document.getElementById('profile-button');
+    const logoutMenu = document.getElementById('logout-menu');
+
+    profileButton.addEventListener('click', () => {
+        logoutMenu.classList.toggle('hidden');
+    });
+
+    window.addEventListener('click', function(e) {
+        if (!profileButton.contains(e.target) && !logoutMenu.contains(e.target)) {
+            logoutMenu.classList.add('hidden');
         }
     });
 </script>
