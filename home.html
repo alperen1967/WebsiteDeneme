@@ -62,17 +62,42 @@
 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 dark:opacity-20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzqqNrkHtIYFvotkDawl8lCJ1Yyg8lleMiwugpWLAdYFxvFmfLbLw6hTtnhzAtWYb-BI89KTVDikPfJUpahBDjGUS73c5nGEkXdggGdzhgOamhJ3KoaSnbyDNjhKwMg6Wl1cF1z-MJ8Yj9zCPD7aZWyB7ODbDj9dI38vGsxGEriqMEZhGrbF-huFKFrIGwYSvNIQSbJNT_1fKPDUG5sakLgs5IbRKJIOqAau8xbyWP6tJd92Coi-_JzDYoHgkZbEWCSnDwvbN5FrFT");'></div>
 <div class="absolute inset-0 bg-gradient-to-b from-background-light via-transparent to-background-light dark:from-background-dark dark:via-transparent dark:to-background-dark"></div>
 <div class="relative z-10 text-center">
-<button class="group relative w-48 h-48 flex items-center justify-center bg-background-light/50 dark:bg-background-dark/50 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-primary/20 dark:border-primary/40">
-<span class="absolute inset-0 border-4 border-dashed border-primary/40 dark:border-primary/60 rounded-full group-hover:rotate-90 transition-transform duration-500 ease-in-out"></span>
-<div class="relative flex items-center justify-center w-36 h-36 bg-primary rounded-full text-white shadow-inner">
-<svg class="w-16 h-16 transform group-hover:scale-110 transition-transform duration-300" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-<path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z" fill="currentColor"></path>
-</svg>
-</div>
-</button>
-<p class="mt-6 font-medium text-lg text-gray-700 dark:text-gray-300">Click the '+' to upload your photo</p>
+    <input type="file" id="file-upload" class="hidden" accept="image/*">
+    <button id="upload-button" class="group relative w-48 h-48 flex items-center justify-center bg-background-light/50 dark:bg-background-dark/50 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-primary/20 dark:border-primary/40">
+        <span class="absolute inset-0 border-4 border-dashed border-primary/40 dark:border-primary/60 rounded-full group-hover:rotate-90 transition-transform duration-500 ease-in-out"></span>
+        <div id="upload-icon" class="relative flex items-center justify-center w-36 h-36 bg-primary rounded-full text-white shadow-inner">
+            <svg class="w-16 h-16 transform group-hover:scale-110 transition-transform duration-300" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <img id="image-preview" class="hidden absolute inset-0 w-full h-full object-cover rounded-full" src="">
+    </button>
+    <p class="mt-6 font-medium text-lg text-gray-700 dark:text-gray-300">Click the '+' to upload your photo</p>
 </div>
 </main>
 </div>
+<script>
+    const uploadButton = document.getElementById('upload-button');
+    const fileUpload = document.getElementById('file-upload');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadIcon = document.getElementById('upload-icon');
 
+    uploadButton.addEventListener('click', () => {
+        fileUpload.click();
+    });
+
+    fileUpload.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            console.log(file.name);
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.remove('hidden');
+                uploadIcon.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body></html>
